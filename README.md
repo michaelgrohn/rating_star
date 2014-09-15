@@ -33,14 +33,12 @@ is_rateable
 
 ```ruby
 @movie = Movie.find_by( name: 'The Dark Knight' )
-@movie.ratings.create( value: 0.9 )
+@movie.ratings.create( value: 0.9 ) # rating value ranges form 0..1
 ```
 
 ```ruby
 # app/views/movies/show.html.haml
-⋮
 = render @movie.rating
-⋮
 ```
 
 This will render something like this ob your webpage:

@@ -10,34 +10,37 @@ This extension adds easy and straight-forward rating functionality to your Rails
 # Gemfile
 gem 'rating_star', git: 'https://github.com/michaelgrohn/rating_star.git'
 ```
+
 ```shell
 $ bundle
 ```
 
 ### Migration
+
 ```shell
 $ rails generate ratings
 $ rake db:migrate
 ```
 
 ### Model
+
 ```ruby
 # app/models/movie.rb
 is_rateable
 ```
 
-That's it! 😃
-
 ## Usage
+
 ```ruby
-@movie = Movie.find_by name: 'The Dark Knight'
-@movie.ratings.create value: 0.9
+@movie = Movie.find_by( name: 'The Dark Knight' )
+@movie.ratings.create( value: 0.9 )
 ```
+
 ```ruby
 # app/views/movies/show.html.haml
-...
+⋮
 = render @movie.rating
-...
+⋮
 ```
 
 This will render something like this ob your webpage:

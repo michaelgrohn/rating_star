@@ -1,0 +1,154 @@
+.rating
+
+
+  overflow: visible
+
+  display: inline-block
+  vertical-align: middle
+
+
+  .info
+    color: hsla( 51, 100, 70, 0.5 )
+    font-size: 0.75em
+    width: 100%
+    display: flex
+    justify-content: space-between
+
+    .vote_count
+      margin-left: 1em
+
+    .value
+      .numerator
+        font-size: 1.5em
+      .numerator, .sepearator, .denominator
+        display: inline-block
+        vertical-align: top
+
+.stars
+
+  display: inline-block
+  vertical-align: middle
+
+  overflow: visible
+
+.stars, .star, .half_star
+
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
+  
+
+.star
+
+  &::before
+    font-size: 2em
+    content: '★'
+    position: absolute
+    left: 0
+    bottom: 0
+    color: hsla( 0, 0, 0, 0 )
+    text-shadow: 0 0 0.7em hsla( 51, 100, 70, 0.7 )
+
+  overflow: visible
+
+  position: relative
+  display: inline-block
+  vertical-align: middle
+  height: 2em
+
+.half_star
+  height: 2em
+  
+  display: inline-block
+  vertical-align: middle
+
+  overflow: visible
+
+  color: hsla( 0, 0, 0, 0 )
+  position: relative
+
+  a
+    display: inline-block
+    height: 100%
+    color: hsla( 0, 0, 0, 0 )
+
+  &::before
+    font-size: 2em
+    overflow: hidden
+    color: hsla( 51, 100, 50, 1 )
+    pointer-events: none
+    position: absolute
+    content: '★'
+
+    //fancy
+    background: -webkit-linear-gradient( hsla( 51, 100, 60, 1 ), hsla( 51, 100, 40, 1 ) )
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+
+  &[data-value='0']::before,
+  &[data-value^='0.0']::before,
+  &[data-value^='0.1']::before,
+  &[data-value^='0.2']::before,
+  &[data-value^='0.3']::before,
+  &[data-value^='0.4']::before
+    color: #111111
+      
+    //fancy
+    background: -webkit-linear-gradient( #111111, #111111 )
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+
+.half_star:nth-child( even )
+  &::before
+    direction: rtl
+    width: 100%
+    right: 0
+    bottom: 0
+
+.half_star:nth-child( odd )
+  &::before
+    left: 0
+    bottom: 0
+    width: 100%
+
+.half_star.rateable:hover::before
+  color: hsla( 51, 100, 50, 1 ) !important
+
+  //fancy
+  background: -webkit-linear-gradient( hsla( 51, 100, 60, 1 ), hsla( 51, 100, 40, 1 ) )
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+
+.stars.rateable:hover, .star.rateable:hover, .half_star.rateable:hover
+  color: hsla( 51, 100, 50, 1 )
+  //fancy
+  background: -webkit-linear-gradient( hsla( 51, 100, 60, 1 ), hsla( 51, 100, 40, 1 ) )
+  -webkit-background-clip: text
+  -webkit-text-fill-color: transparent
+
+  .half_star::before
+    color: hsla( 51, 100, 50, 1 )
+
+    //fancy
+    background: -webkit-linear-gradient( hsla( 51, 100, 60, 1 ), hsla( 51, 100, 40, 1 ) )
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+    
+
+.star:hover
+  ~ .star .half_star::before
+    color: #111111
+    //fancy
+    background: -webkit-linear-gradient( #111111, #111111 )
+    -webkit-background-clip: text
+    -webkit-text-fill-color: transparent
+.half_star:hover
+  ~ .half_star::before
+    color: #111111 !important
+    //fancy
+    background: -webkit-linear-gradient( #111111, #111111 ) !important
+    -webkit-background-clip: text !important
+    -webkit-text-fill-color: transparent !important

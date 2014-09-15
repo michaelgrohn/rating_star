@@ -1,0 +1,7 @@
+- value ||= 0
+- scale ||= 1
+
+%span.value
+  %span.numerator[ :ratingValue ]= ( value * scale ).round( 1 )
+  %span.seperator out of
+  %span.denominator[ :bestRating ]= scale

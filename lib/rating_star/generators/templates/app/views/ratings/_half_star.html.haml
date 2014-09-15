@@ -1,0 +1,16 @@
+- scale    ||= 0.5
+- count    ||= 0
+- rateable ||= false
+- value    ||= 1
+- symbol     = value < 0.5 ? '☆' : '★'
+- rater    ||= nil
+- item     ||= nil
+
+%span.half_star{ data: { value: value }, class: ( 'rateable' if rateable ) }<
+  = link_to_if item,
+               symbol,
+               rate_path( rating: { value:         ( count + 1 ).to_f * scale,
+                                    rateable_id:   rateable.try( :id ),
+                                    rateable_type: rateable.try( :class ),
+                                    rater_id:      rater.try( :id )            } ),
+               method: :post

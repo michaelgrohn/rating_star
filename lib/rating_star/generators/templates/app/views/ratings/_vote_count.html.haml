@@ -1,0 +1,7 @@
+- vote_count ||= 0
+
+%span.vote_count<
+  = '('
+  %span[ :ratingCount ]= vote_count
+  %span= vote_count == 1 ? 'rating' : 'ratings'
+  = ')'

@@ -1,0 +1,14 @@
+- rateable ||= false
+- item     ||= nil
+- scale    ||= 5
+- value    ||= 1
+- rater    ||= nil
+
+%span.stars{ data: { value: value }, class: ( 'rateable' if rateable ) }<
+  - scale.times do |n|
+    = render 'ratings/star', value:    [ value*scale - n, 0 ].max - [ value*scale - (n+1), 0 ].max,
+                             rateable: rateable,
+                             count:    n,
+                             rater:    rater,
+                             item:     item,
+                             scale:    1 / BigDecimal.new( scale )

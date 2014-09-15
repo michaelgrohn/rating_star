@@ -1,0 +1,15 @@
+- scale      ||= 1
+- count      ||= 0
+- rateable   ||= false
+- value      ||= 1
+- rater      ||= nil
+- item       ||= nil
+
+%span.star{ data: { value: value }, class: ( 'rateable' if rateable ) }<
+  - 2.times do |n|
+    = render 'ratings/half_star', value:    [ value*2 - n, 0 ].max - [ value*2 - (n+1), 0 ].max,
+                                  count:    2 * count + n,
+                                  rateable: rateable,
+                                  item:     item,
+                                  rater:    rater,
+                                  scale:    scale / BigDecimal.new( 2 )

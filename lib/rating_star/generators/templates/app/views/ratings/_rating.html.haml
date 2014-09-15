@@ -1,0 +1,17 @@
+- rateable        ||= false
+- with_vote_count ||= false
+- with_value      ||= false
+- scale           ||= 5
+- rater           ||= nil
+
+%span[ rating, itemprop ]{ class: ( rateable ? 'rateable' : '' ), data: { value: rating.value, vote_count: rating.vote_count } }
+
+  %meta[ :ratingValue ]{ content: rating.value * scale }
+  %meta[ :bestRating  ]{ content: scale }
+  %meta[ :worstRating ]{ content: 0 } 
+  %meta[ :ratingCount ]{ content: rating.vote_count }
+
+  = render 'ratings/stars', scale: scale, value: rating.value, rateable: rateable, rater: rater, item: rating.item
+  %span.info
+    = render 'ratings/value', value: rating.value, scale: scale if with_value
+    = render 'ratings/vote_count', vote_count: rating.vote_count if with_vote_count

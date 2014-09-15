@@ -72,7 +72,7 @@ is_rateable by: [ :users, :readers, … ]
 is_rater for: [ :movies, :books ]
 ```
 
-The `rating` object has 2 main attributes, `value` and `vote_count`:
+Accessing `.rating` on a model gives you the average rating, based on all votes. A rating has 2 main attributes: `value` and `vote_count`. The `Value` is the actual rating value - a `BigDecimal` that ranges form `0..1`. The`vote_count` reflects the count of given ratings.
 
 ```ruby
 @movie.rating.vote_count
@@ -81,7 +81,8 @@ The `rating` object has 2 main attributes, `value` and `vote_count`:
 #=> 0.9
 ```
 
-Accessing `.rating` on a model gives you the average rating value, based on all votes:
+If the `vote_count` is 1, the rating represents a single rating. If it is greater than 1, the rating represents an average rating, based on `vote_count` many other ratings.
+
 
 ```ruby
 @movie.ratings.create( value: 0.8 )
@@ -97,7 +98,7 @@ Ways to access your models:
 @movie.ratings
 #=> a collection of all ratings
 @movie.rating
-#=> a new rating object, the value is the average of all rating values, vote_count reflects the count of ratings
+#=> a new average rating
 
 @user = User.find_by( name: "Michael" )
 @rating = @movie.ratings.create( value: 1.0, rater: @user )

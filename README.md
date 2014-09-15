@@ -55,6 +55,8 @@ Usage
 
 ### Models and Controllers
 
+Specify attributions, to easily reference the correspondending model later:
+
 ```ruby
 # app/models/movie.rb
 is_rateable by: :users
@@ -70,25 +72,35 @@ is_rateable by: [ :users, :readers, … ]
 is_rater for: [ :movies, :books ]
 ```
 
+The `rating` object has 2 main attributes, `value` and `vote_count`:
+
 ```ruby
 @movie.rating.vote_count
 #=> 1
-@movie.rating.value # average value, based on all votes
+@movie.rating.value
 #=> 0.9
+```
 
+Accessing `.rating` on a model gives you the average rating value, based on all votes:
 
-
+```ruby
 @movie.ratings.create( value: 0.8 )
-
 @movie.rating.vote_count
 #=> 2
 @movie.rating.value
 #=> 0.85
+```
 
+Ways to access your models:
 
+```ruby
+@movie.ratings
+#=> a collection of all ratings
+@movie.rating
+#=> a new rating object, the value is the average of all rating values, vote_count reflects the count of ratings
 
 @user = User.find_by( name: "Michael" )
-@rating = @movie.ratings.create( value: 1.0, rater: @use )
+@rating = @movie.ratings.create( value: 1.0, rater: @user )
 
 @rating.rater.name
 #=> "Michael"

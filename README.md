@@ -45,11 +45,10 @@ Usage
 ```
 
 ```ruby
-# app/views/movies/show.html.haml⋮
-%h1= @movie.title
-⋮
+# app/views/movies/show.html.haml
+# ⋮
 = render @movie.rating
-⋮
+# ⋮
 ```
 
 This will render something like this ob your webpage:

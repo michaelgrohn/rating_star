@@ -36,21 +36,27 @@ is_rateable
 Usage
 ------------------------------
 
+### Quickstart
+
 ```ruby
-@movie = Movie.find_by( name: 'The Dark Knight' )
+@movie = Movie.find_by( title: 'The Dark Knight' )
+
 @movie.ratings.create( value: 0.9 ) # rating value ranges form 0..1
 ```
 
 ```ruby
-# app/views/movies/show.html.haml
+# app/views/movies/show.html.haml⋮
+%h1= @movie.title
+⋮
 = render @movie.rating
+⋮
 ```
 
 This will render something like this ob your webpage:
 
 ![](https://raw.githubusercontent.com/michaelgrohn/rating_star/master/lib/rating_star/examples/example.png)
 
-### Configurations
+### Models and Controllers
 
 ```ruby
 # app/models/movie.rb
@@ -73,27 +79,59 @@ is_rater for: [ :movies, :books ]
 @movie.rating.value # average value, based on all votes
 #=> 0.9
 
+
+
 @movie.ratings.create( value: 0.8 )
+
 @movie.rating.vote_count
 #=> 2
 @movie.rating.value
 #=> 0.85
 
+
+
 @user = User.find_by( name: "Michael" )
-rating = @movie.ratings.create( value: 1.0, rater: @use )
-rating.item.title
+@rating = @movie.ratings.create( value: 1.0, rater: @use )
+
+@rating.rater.name
+#=> "Michael"
+@rating.item.title
 #=> "The Dark Knight"
-rating.rater.name
+
+@movie.rating_users.first.name
 #=> "Michael"
 @user.rated_movies.first.title
 #=> "The Dark Knight"
-@movie.rating_users.first.name
-#=> "Michael"
-
-@user.rated_books.first.name
+@user.rated_books.first.title
 #=> "The Dark Tower"
+```
 
-## Contributing
+### Views
+
+Simply render the rating as stars:
+
+```ruby
+= render @movie.rating # 5 stars default
+= render @movie.rating, scale: 4 # 4 stars system
+= render @movie.rating, scale: 11 # ours goes up to 11! 
+```
+
+Enable rating by clicking on the stars:
+
+```ruby
+= render @movie.rating, rateable: true
+= render @movie.rating, rateable: true, rater: current_user
+```
+
+Show additional information under the stars:
+
+```ruby
+= render @movie.rating, with_vote_count: true
+= render @movie.rating, with_value: true # adds "4.5 out of 5"
+```
+
+Contributing
+------------------------------
 
 1. Fork it ( https://github.com/[my-github-username]/rating_star/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)

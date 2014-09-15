@@ -26,21 +26,18 @@ $ rails generate ratings
 $ rake db:migrate
 ```
 
-### Model
-
-```ruby
-# app/models/movie.rb
-is_rateable
-```
-
 Usage
 ------------------------------
 
 ### Quickstart
 
 ```ruby
-@movie = Movie.find_by( title: 'The Dark Knight' )
+# app/models/movie.rb
+is_rateable
+```
 
+```ruby
+@movie = Movie.find_by( title: 'The Dark Knight' )
 @movie.ratings.create( value: 0.9 ) # rating value ranges form 0..1
 ```
 
@@ -51,7 +48,7 @@ Usage
 # ⋮
 ```
 
-This will render something like this ob your webpage:
+This will render something like this on your webpage:
 
 ![](https://raw.githubusercontent.com/michaelgrohn/rating_star/master/lib/rating_star/examples/example.png)
 

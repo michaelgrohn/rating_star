@@ -55,7 +55,7 @@ Usage
 
 ### Models and Controllers
 
-Specify attributions, to easily reference the correspondending model later:
+Specify attributions, to easily reference the correspondending model later (not mandatory):
 
 ```ruby
 # app/models/movie.rb

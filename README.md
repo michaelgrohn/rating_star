@@ -4,11 +4,8 @@ This extension adds easy and straight-forward rating functionality to your Rails
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
+    # Gemfile
     gem 'rating_star', git: 'https://github.com/michaelgrohn/rating_star.git'
-
-And then execute:
 
     $ bundle
 

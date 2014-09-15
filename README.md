@@ -1,8 +1,10 @@
-# RatingStar ★★★★☆
+RatingStar ★★★★☆
+=================
 
 This extension adds easy and straight-forward rating functionality to your Rails app. It also comes with pre-defined views, for the ratings to be displayed as a set of stars.
 
-## Setup
+Setup
+------------------------------
 
 ### Installation
 
@@ -29,7 +31,8 @@ $ rake db:migrate
 is_rateable
 ```
 
-## Usage
+Usage
+------------------------------
 
 ```ruby
 @movie = Movie.find_by( name: 'The Dark Knight' )
@@ -63,34 +66,30 @@ is_rater for: [ :movies, :books ]
 ```
 
 ```ruby
-@movie.rating.votes_count
+@movie.rating.vote_count
 #=> 1
-@movie.rating.value # average value, based on all votes
+@movie.rating.value
 #=> 0.9
+
 @movie.ratings.create( value: 0.8 )
-@movie.rating.votes_count
+@movie.rating.vote_count
 #=> 2
-@movie.rating.value 
+@movie.rating.value # average value, based on all votes
 #=> 0.85
-@user = User.find_by( name: "Michael Grohn" )
+
+@user = User.find_by( name: "Michael" )
 @rating = @movie.ratings.create( value: 1.0, rater_id: @user.id, rater_type: @user.class
 @rating.item.title
 #=> "The Dark Knight"
 @rating.rater.name
-#=> "Michael Grohn"
+#=> "Michael"
 @user.rated_movies.first.title
 #=> "The Dark Knight"
 @movie.rating_users.first.name
-#=> "Michael Grohn"
+#=> "Michael"
 
-
-@book = Book.find_by name: 'Twilight'
-@book.rating.value
-#=> 0.25
-
-@movie.rating_users
-# ActiveRecord::Model
-```
+@user.rated_books.first.name
+#=> "The Dark Tower"
 
 ## Contributing
 

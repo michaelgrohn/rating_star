@@ -31,15 +31,18 @@ That's it! 😃
 ## Usage
 ```ruby
 @movie = Movie.find_by name: 'The Dark Knight'
-@movie.ratings << Rating.new( 0.8 )
+@movie.ratings << Rating.new( 0.9 )
 ```
 ```ruby
 # app/views/movies/show.html.haml
-%h1= @movie.title
+...
 = render @movie.rating
+...
 ```
 
-![https://github.com/michaelgrohn/rating_star/blob/master/lib/rating_star/examples/example.png]
+This will render something like this:
+
+![](https://raw.githubusercontent.com/michaelgrohn/rating_star/master/lib/rating_star/examples/example.png)
 
     
 ## Contributing

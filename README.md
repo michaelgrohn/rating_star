@@ -15,7 +15,7 @@ $ bundle
 ## Setup
 
 ### Migration
-```ruby
+```shell
 rails generate ratings
 rake db:migrate
 ```

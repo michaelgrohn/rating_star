@@ -1,6 +1,8 @@
 RatingStar ★★★★☆
 =================
 
+**This gem is in early alpha. No guarantee, it will install or work at all, at the moment.**
+
 This extension adds easy and straight-forward rating functionality to your Rails app. It also comes with pre-defined views, for the ratings to be displayed as a set of stars.
 
 Setup

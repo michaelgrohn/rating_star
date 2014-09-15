@@ -6,8 +6,7 @@ This extension adds easy and straight-forward rating functionality to your Rails
 
     # Gemfile
     gem 'rating_star', git: 'https://github.com/michaelgrohn/rating_star.git'
-
-
+ 
     $ bundle
 
 ## Setup

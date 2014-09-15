@@ -59,7 +59,7 @@ is_rateable by: :users
 
 ```ruby
 # app/models/book.rb
-is_rateable by: :users
+is_rateable by: [ :users, :readers, ... ]
 ```
 
 ```ruby
@@ -70,13 +70,13 @@ is_rater for: [ :movies, :books ]
 ```ruby
 @movie.rating.vote_count
 #=> 1
-@movie.rating.value
+@movie.rating.value # average value, based on all votes
 #=> 0.9
 
 @movie.ratings.create( value: 0.8 )
 @movie.rating.vote_count
 #=> 2
-@movie.rating.value # average value, based on all votes
+@movie.rating.value
 #=> 0.85
 
 @user = User.find_by( name: "Michael" )

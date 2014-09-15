@@ -36,7 +36,7 @@ is_rateable
 
 ```ruby
 @movie = Movie.find_by( title: 'The Dark Knight' )
-@movie.ratings.create( value: 0.9 ) # rating value ranges form 0..1
+@movie.ratings.create( value: 0.9 )
 ```
 
 ```ruby
@@ -72,7 +72,7 @@ is_rateable by: [ :users, :readers, … ]
 is_rater for: [ :movies, :books ]
 ```
 
-Accessing `.rating` on a model gives you the average rating, based on all votes. A rating has 2 main attributes: `value` and `vote_count`. The `Value` is the actual rating value - a `BigDecimal` that ranges form `0..1`. The`vote_count` reflects the count of given ratings.
+Accessing `.rating` on a model gives you the average rating, based on all votes. A rating has 2 main attributes: `value` and `vote_count`. The `Value` is the actual rating value - a `BigDecimal` that ranges form 0..1. The`vote_count` reflects the count of given ratings.
 
 ```ruby
 @movie.rating.vote_count

@@ -80,10 +80,10 @@ is_rater for: [ :movies, :books ]
 #=> 0.85
 
 @user = User.find_by( name: "Michael" )
-@rating = @movie.ratings.create( value: 1.0, rater_id: @user.id, rater_type: @user.class
-@rating.item.title
+rating = @movie.ratings.create( value: 1.0, rater: @use )
+rating.item.title
 #=> "The Dark Knight"
-@rating.rater.name
+rating.rater.name
 #=> "Michael"
 @user.rated_movies.first.title
 #=> "The Dark Knight"

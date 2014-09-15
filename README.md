@@ -1,25 +1,43 @@
-# RatingStar
+# RatingStar ★★★★☆
 
-TODO: Write a gem description
+This extension adds easy and straight-forward rating functionality to your Rails app. It also comes with pre-defined views, for the ratings to be displayed as a set of stars.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'rating_star'
+    gem 'rating_star', git: 'https://github.com/michaelgrohn/rating_star.git'
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
+## Setup
 
-    $ gem install rating_star
+### Migration
+
+    rails generate ratings
+    rake db:migrate
+
+### Model
+
+    # app/models/movie.rb
+    is_rateable
+
+That's it! 😃
 
 ## Usage
 
-TODO: Write usage instructions here
+    @movie = Movie.find_by name: 'The Dark Knight'
+    @movie.ratings << Rating.new( 0.8 )
 
+    # app/views/movies/show.html.haml
+    %h1= @movie.title
+    = render @movie.rating
+
+    ★★★★☆
+
+    
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/rating_star/fork )

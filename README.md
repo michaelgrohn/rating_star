@@ -59,7 +59,7 @@ is_rateable by: :users
 
 ```ruby
 # app/models/book.rb
-is_rateable by: [ :users, :readers, ... ]
+is_rateable by: [ :users, :readers, … ]
 ```
 
 ```ruby

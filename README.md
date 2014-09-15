@@ -26,10 +26,8 @@ $ rails generate ratings
 $ rake db:migrate
 ```
 
-Usage
+Quickstart
 ------------------------------
-
-### Quickstart
 
 ```ruby
 # app/models/movie.rb
@@ -51,6 +49,9 @@ is_rateable
 This will render something like this on your webpage:
 
 ![](https://raw.githubusercontent.com/michaelgrohn/rating_star/master/lib/rating_star/examples/example.png)
+
+Usage
+------------------------------
 
 ### Models and Controllers
 

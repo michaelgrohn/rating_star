@@ -72,19 +72,14 @@ is_rateable by: [ :users, :readers, … ]
 is_rater for: [ :movies, :books ]
 ```
 
-Accessing `.rating` on a model gives you the average rating, based on all votes. A rating has 2 main attributes: `value` and `vote_count`. The `Value` is the actual rating value - a `BigDecimal` that ranges form 0..1. The`vote_count` reflects the count of given ratings.
+Accessing `.rating` on a model gives you the average rating, based on all votes. The ratings `.value` is the actual rating value and ranges form 0..1. `.vote_count` is the count of given ratings. If it is greater than 1, the rating represents an average rating.
 
 ```ruby
 @movie.rating.vote_count
 #=> 1
 @movie.rating.value
 #=> 0.9
-```
 
-If the `vote_count` is 1, the rating represents a single rating. If it is greater than 1, the rating represents an average rating, based on `vote_count` many other ratings.
-
-
-```ruby
 @movie.ratings.create( value: 0.8 )
 @movie.rating.vote_count
 #=> 2

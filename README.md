@@ -93,22 +93,24 @@ Ways to access your models:
 @movie.ratings
 #=> a collection of all ratings
 @movie.rating
-#=> a new average rating
+#=> the average rating (a new object)
 
-@user = User.find_by( name: "Michael" )
+@user = User.first
 @rating = @movie.ratings.create( value: 1.0, rater: @user )
 
-@rating.rater.name
-#=> "Michael"
-@rating.item.title
-#=> "The Dark Knight"
+@rating.rater
+#=> the object that gave this rating (nil if not specified)
+@rating.item
+#=> the object that is being rated
 
-@movie.rating_users.first.name
-#=> "Michael"
-@user.rated_movies.first.title
-#=> "The Dark Knight"
-@user.rated_books.first.title
-#=> "The Dark Tower"
+@movie.rating_users # must have specified is_rateable by: :users
+#=> a collection of all the users that gave this movie a rating
+@user.rated_movies # must have specified is_rater for: :movies
+#=> a collection of all movies, that this user has rated
+@user.rated_books # must have specified is_rater for: :books
+#=> a collection of all books, that this user has rated
+@user.rated_books( min: 0.5, max: 0.8 ) # must have specified is_rater for: :books
+#=> a collection of all books, that this user has rated with a rating between 0.5 and 0.8
 ```
 
 ### Views

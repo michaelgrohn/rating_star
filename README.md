@@ -103,13 +103,14 @@ Ways to access your models:
 @rating.item
 #=> the object that is being rated
 
-@movie.rating_users # must have specified is_rateable by: :users
+# For the following accessors, you must specifiy is_rateable by: :users, is_rater for: [ :movies, :books ] etc.
+@movie.rating_users
 #=> a collection of all the users that gave this movie a rating
-@user.rated_movies # must have specified is_rater for: :movies
+@user.rated_movies
 #=> a collection of all movies, that this user has rated
-@user.rated_books # must have specified is_rater for: :books
+@user.rated_books
 #=> a collection of all books, that this user has rated
-@user.rated_books( min: 0.5, max: 0.8 ) # must have specified is_rater for: :books
+@user.rated_books( min: 0.5, max: 0.8 )
 #=> a collection of all books, that this user has rated with a rating between 0.5 and 0.8
 ```
 

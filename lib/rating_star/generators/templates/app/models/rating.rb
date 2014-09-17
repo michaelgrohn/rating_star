@@ -20,6 +20,17 @@ class Rating < ActiveRecord::Base
     self.item.ratings
   end
 
+  def scale *args
+    min, max = 0, 1                       if args.none?
+    min, max = args[ :min ], args[ :max ] if args.one? && args.first.is_a? Hash
+    min, max = 0, args.first              if args.one? && !args.first.is_a? Hash
+    min, max = args.take( 2 )             if args.many?
+  end
+  
+  def scaled
+    value * ( max - min ) + min
+  end
+
   def <=> other
     self.confidence_value <=> other.confidence_value
   end
@@ -35,5 +46,23 @@ class Rating < ActiveRecord::Base
   def confidence
     1 - uncertainty
   end
+
+  def % x
+    scale x
+  end
+#*
+#**
+#+
+#+@
+#-
+#-@
+#/
+#<
+#<=
+#<=>
+#==
+#===
+#>
+#>=
 
 end

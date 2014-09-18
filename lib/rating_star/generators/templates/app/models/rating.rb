@@ -47,9 +47,31 @@ class Rating < ActiveRecord::Base
     1 - uncertainty
   end
 
+  def weighted_value
+    count * value
+  end
+
   def % x
     scale x
   end
+
+  def -@
+    Rating.new( attributes.merge( count: -count ) )
+  end
+
+  def + x
+    common_attributes = [ self, x ].common( &:attributes )
+    total_count       = [ self, x ].sum( &:count )
+    weighted_values   = [ self, x ].sum( &:weighted_value )
+    average_value     = weighted_values / total_count
+    result            = { value: average_value, count: total_count }
+    Rating.new( common_attributes.merge( result ) )
+  end
+
+  def - x
+    self + -x
+  end
+
 #*
 #**
 #+

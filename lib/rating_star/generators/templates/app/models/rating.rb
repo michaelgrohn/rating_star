@@ -3,6 +3,8 @@ class Rating < ActiveRecord::Base
   include Comparable
 
   html_schema_type :AggregateRating
+  
+  @scale = 0..1
 
   belongs_to :item,  polymorphic: true
   belongs_to :rater, polymorphic: true
@@ -12,27 +14,20 @@ class Rating < ActiveRecord::Base
   after_initialize :set_defaults
 
   def set_defaults
-    self.value      ||= 0
-    self.vote_count ||= 1
+    self.value ||= 0
+    self.count ||= 1
   end
 
   def related
-    self.item.ratings
-  end
-
-  def scale *args
-    min, max = 0, 1                       if args.none?
-    min, max = args[ :min ], args[ :max ] if args.one? && args.first.is_a? Hash
-    min, max = 0, args.first              if args.one? && !args.first.is_a? Hash
-    min, max = args.take( 2 )             if args.many?
+    item.ratings
   end
   
-  def scaled
-    value * ( max - min ) + min
+  def scaled_value( scale = class.scale )
+    value * ( scale.max - scale.min ) + scale.min
   end
 
   def <=> other
-    self.confidence_value <=> other.confidence_value
+    confidence_value <=> other.confidence_value
   end
 
   def confidence_value
@@ -40,51 +35,42 @@ class Rating < ActiveRecord::Base
   end
 
   def uncertainty
-    0.8 ** vote_count
+    0.8 ** count
   end
 
   def confidence
     1 - uncertainty
   end
 
-  def weighted_value
-    count * value
-  end
-
-  def % x
-    scale x
+  def +@
+    self
   end
 
   def -@
     Rating.new( attributes.merge( count: -count ) )
   end
 
-  def + x
-    common_attributes = [ self, x ].common( &:attributes )
-    total_count       = [ self, x ].sum( &:count )
-    weighted_values   = [ self, x ].sum( &:weighted_value )
-    average_value     = weighted_values / total_count
-    result            = { value: average_value, count: total_count }
-    Rating.new( common_attributes.merge( result ) )
+  def + other
+    operands      = self, other
+    total_count   = operands.sum( &:count )
+    average_value = operands.sum{ |x| (x.count/total_count)*x.value }
+    Rating.new( operands.common( &:attributes ).merge( value: averagle_value, count: total_count ) )
   end
 
-  def - x
-    self + -x
+  def - other
+    self + -other
+  end
+
+  def abs
+    Rating.new( attributes.merge( count.abs ) )
+  end
+  
+  def % n
+    scaled_value( 0..n )
   end
 
 #*
 #**
-#+
-#+@
-#-
-#-@
 #/
-#<
-#<=
-#<=>
-#==
-#===
-#>
-#>=
 
 end

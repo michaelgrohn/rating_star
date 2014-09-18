@@ -3,11 +3,11 @@ module HashExtension
   extend ActiveSupport::Concern
 
   def & other
-    select { |k| self[ k ] == other[ k ] }
+    select { |k, v| other[ k ] == v }
   end
 
   def | other
-    merge( other ) { nil }
+    merge( other ) { |_, v1, v2| v1 == v2 ? v1 : nil }
   end
 
 end
